@@ -207,7 +207,7 @@
 
 \input{uclath12.clo}\relax
 
-
+
 %    ****************************************
 %    *                LISTS                 *
 %    ****************************************
@@ -284,7 +284,7 @@
 \newdimen\descriptionmargin
 \descriptionmargin=3em
 
-
+
 %    ****************************************
 %    *         OTHER ENVIRONMENTS           *
 %    ****************************************
@@ -339,7 +339,7 @@
 \fboxsep = 3pt    % Space left between box and text by \fbox and \framebox.
 \fboxrule = .4pt  % Width of rules in box made by \fbox and \framebox.
 
-
+
 %    ****************************************
 %    *        CHAPTERS AND SECTIONS         *
 %    ****************************************
@@ -382,7 +382,7 @@
 % command redefines it to be 'APPENDIX'.
 \def\@chapapp{CHAPTER}
 
-
+
 %    ****************************************
 %    *         TABLE OF CONTENTS, ETC.      *
 %    ****************************************
@@ -485,7 +485,7 @@
 
 \let\l@table\l@figure
 
-
+
 %    ****************************************
 %    *             BIBLIOGRAPHY             *
 %    ****************************************
@@ -520,7 +520,7 @@
                                 % command. 
 % \def\@cite#1{[#1]}            % Produces the output of the \cite command.
 
-
+
 %    ****************************************
 %    *              THE INDEX               *
 %    ****************************************
@@ -550,7 +550,7 @@
 
 \def\indexspace{\par \vskip 10pt plus 5pt minus 3pt\relax}
 
-
+
 %    ****************************************
 %    *             FOOTNOTES                *
 %    ****************************************
@@ -595,7 +595,7 @@
 %    in the text.  Default used.
 %
 
-
+
 %    ****************************************
 %    *         FIGURES AND TABLES           *
 %    ****************************************
@@ -682,7 +682,7 @@
 \@namedef{table*}{\@tablestrue\@dblfloat{table}}
 \@namedef{endtable*}{\end@dblfloat}
 
-
+
 %    ****************************************
 %    *            PAGE STYLES               *
 %    ****************************************
@@ -749,7 +749,7 @@
 \def\@oddfoot{}\def\@evenhead{\rm \thepage\hfil\slshape\leftmark\hbox {}}%
 \def\@evenfoot{}\def\sectionmark##1{}\def\subsectionmark##1{}}
 
-
+
 %    ****************************************
 %    *            MISCELLANEOUS             *
 %    ****************************************
@@ -802,7 +802,7 @@
    \edef\@currentlabel{\csname p@footnote\endcsname\@thefnmark}\@makefntext
     {\rule{\z@}{\footnotesep}\ignorespaces
       #1\strut}\renewcommand\baselinestretch{\@spacing}}}
-
+
 %    ****************************************
 %    *           INITIALIZATION             *
 %    ****************************************

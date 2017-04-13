@@ -9,6 +9,7 @@
 *.lot
 *.synctex.gz
 *.toc
+localtest*
 
 # =========================
 # Windows image file caches

@@ -1,5 +1,6 @@
 % UCLA THESIS TITLE PAGE STYLE (format for preliminary pages)
-% (C) Copyright 2012 by Jose Hales-Garcia
+% (C) Copyright 2017 by Louis Yang
+% derived from (C) Copyright 2012 by Jose Hales-Garcia
 % derived from (C) Copyright 1995 by John Heidemann,
 % derived from work (C) Copyright 1988 Richard B. Wales,
 % taken in turn from material Copyright (C) 1985 by Leslie Lamport.
@@ -72,7 +73,7 @@
          \normalsize A \@thesisname\
 	 submitted in partial satisfaction \\
          of the requirements for the degree \\
-         \@degreename\if@department\ in \@department \fi\\
+         \@degreename\if@department\ in \@department \fi \\
          \vskip 24pt plus0pt minus6pt
          by \\
          \vskip 24pt plus0pt minus6pt
@@ -108,8 +109,8 @@
          %\ifx\@copyrightyear\@degreeyear\else , \@degreeyear \fi
          %\ by \@author \\
          %\@copyrightinfo
-	 \normalsize \normalfont \copyright\ Copyright by \\
-	 \@author \\ \@copyrightyear
+         \normalsize \normalfont \copyright\ Copyright by \\
+         \@author \\ \@copyrightyear
       \end{center}
    \fi
    \ColumnRestore
@@ -152,32 +153,43 @@
 % changed, it may be desirable to change the "\vskip" before the name.
 
 \newcommand\@signatureline[1]{
-   \vskip-10pt{#1} \\
-   \vskip 24pt plus0pt minus15pt%
+   #1
+   
+   %\vskip-10pt{#1} \\
+   %\vskip 24pt plus0pt minus15pt
 }
 
 \newcommand\@makesignaturepage{
    \ColumnSave
-%   \setcounter{page}{4}
    \noindent
    \renewcommand\baselinestretch{\@doublespacing}\@normalsize
    \normalsize \normalfont The \@thesisname\ of \@author\ is approved.
-   \vskip 12pt plus0pt minus24pt
+   %\vskip 12pt plus0pt minus24pt
+   
    \begin {center}
-      \ifnum\c@members>5 \@signatureline{\@memberF}\fi
-      \ifnum\c@members>4 \@signatureline{\@memberE}\fi
-      \ifnum\c@members>3 \@signatureline{\@memberD}\fi
-      \ifnum\c@members>2 \@signatureline{\@memberC}\fi
-      \ifnum\c@members>1 \@signatureline{\@memberB}\fi
+      % Non-chair committee members
       \ifnum\c@members>0 \@signatureline{\@memberA}
-         \else\typeout{No non-chair committee members.}\fi
+         \ifnum\c@members>1 \@signatureline{\@memberB}
+            \ifnum\c@members>2 \@signatureline{\@memberC}
+               \ifnum\c@members>3 \@signatureline{\@memberD}
+                  \ifnum\c@members>4 \@signatureline{\@memberE}
+                     \ifnum\c@members>5 \@signatureline{\@memberF}
+                     \fi
+                  \fi
+               \fi
+            \fi
+         \fi
+      \else
+	     \typeout{No non-chair committee members.}
+      \fi
+      % Committee chairs
       \ifnum\c@chairs>2
+         \@signatureline{\@chairA, Committee Co-chair}
+         \@signatureline{\@chairB, Committee Co-chair}
          \@signatureline{\@chairC, Committee Co-chair}
-         \@signatureline{\@chairB, Committee Co-chair}
-         \@signatureline{\@chairA, Committee Co-chair}
       \else\ifnum\c@chairs>1
-         \@signatureline{\@chairB, Committee Co-chair}
          \@signatureline{\@chairA, Committee Co-chair}
+         \@signatureline{\@chairB, Committee Co-chair}
       \else\ifnum\c@chairs>0
          \@signatureline{\@chairA, Committee Chair}
       \else\typeout{No committee chair.}
@@ -260,7 +272,7 @@
 \newcounter{vitaitems}
 \setcounter{vitaitems}{0}
 \newcommand\@vitadate[1]{{\parbox[t]{1.25in}{\normalfont{#1}}}}
-\newcommand\@vitatext[1]{{\parbox[t]{4.45in}{\normalfont{#1}}}}
+\newcommand\@vitatext[1]{{\parbox[t]{5.25in}{\normalfont{#1}}}}
 \newcommand\vitaitem[2]{
    \ifcase\value{vitaitems}
       \def\@vitaA{\@vitadate{#1} & \@vitatext{#2}} \or
@@ -341,7 +353,7 @@
 
 \newcommand\@printvitaitem[1]{
    \noindent
-   \begin {tabular} {@{}p{1.25in}@{}p{4.45in}}
+   \begin {tabular} {@{}p{1.25in}@{}p{5.25in}}
       #1
    \end {tabular}
 }
