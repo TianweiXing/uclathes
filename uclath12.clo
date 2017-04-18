@@ -88,7 +88,7 @@
 
 \normalsize  % Choose the normalsize font.
 
-
+
 %  ****************************************
 %  *            PAGE LAYOUT               *
 %  ****************************************
@@ -173,7 +173,7 @@
 \@fpbot 0pt plus 1fil    % Stretch at bottom of float page/column. (Must be 
                          % 0pt plus ... )                                   
 
-
+
 %  ****************************************
 %  *           PARAGRAPHING               *
 %  ****************************************
@@ -207,7 +207,7 @@
 % \interlinepenalty    % Breaking at a line within a paragraph.
 % \brokenpenalty       % Breaking after a hyphenated line.
 
-
+
 %    ****************************************
 %    *        CHAPTERS AND SECTIONS         *
 %    ****************************************
@@ -376,7 +376,7 @@
   \def\@chapapp{APPENDIX}
   \def\thechapter{\Alph{chapter}}}
 
-
+
 %    ****************************************
 %    *                LISTS                 *
 %    ****************************************

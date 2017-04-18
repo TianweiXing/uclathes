@@ -197,6 +197,10 @@
 \DeclareOption{nohyphenatetitles}{\setboolean{hyphenatetitles}{false}}
 \DeclareOption{hyphenatetitles}{\setboolean{hyphenatetitles}{true}}
 
+% use bibtex in publication list in the vita
+\newif\if@bibinvita
+\DeclareOption{bibinvita}{\@bibinvitatrue}
+
 % The \ProcessOptions command does the options.
 
 \ProcessOptions
@@ -502,7 +506,7 @@
 %  \sfcode`\.=1000\relax --
 %      Causes a `.' (period) not to produce an end-of-sentence space.
 
-\def\thebibliography#1{\chapter*{References\markboth
+\newenvironment{thebibliography}[1]{\chapter*{References\markboth
   {REFERENCES}{REFERENCES}}
   \addcontentsline{toc}{chapter}{References}
   \renewcommand\baselinestretch{1}
@@ -513,12 +517,49 @@
     \def\newblock{\hskip .11em plus .33em minus -.07em}
     \sloppy
     \sfcode`\.=1000\relax}
+  {\renewcommand\baselinestretch{\@spacing}\@normalsize\endlist}
 
-\def\endthebibliography{\renewcommand\baselinestretch{\@spacing}\@normalsize\endlist}
+% \def\thebibliography#1{\chapter*{References\markboth
+%  {REFERENCES}{REFERENCES}}
+%  \addcontentsline{toc}{chapter}{References}
+%  \renewcommand\baselinestretch{1}
+%  \@normalsize
+%  \list{[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+%    \advance\leftmargin\labelsep
+%    \usecounter{enumi}}
+%    \def\newblock{\hskip .11em plus .33em minus -.07em}
+%    \sloppy
+%    \sfcode`\.=1000\relax}
+
+% \def\endthebibliography{\renewcommand\baselinestretch{\@spacing}\@normalsize\endlist}
 
 % \def\@biblabel#1{[#1]\hfill}  % Produces the label for a \bibitem[...]
                                 % command. 
 % \def\@cite#1{[#1]}            % Produces the output of the \cite command.
+
+
+%    ****************************************
+%    *             PUBLICATIONS             *
+%    ****************************************
+%
+% This provides the publications environment in Vita page. It is modified from
+% the thebibliography environment.
+%
+
+\newenvironment{publications}[1]{
+  \begin{center}
+    \textsc{\large Publications} \\
+  \end{center}
+  \nobreak \vskip 12pt
+  \renewcommand\baselinestretch{1}
+  \@normalsize
+  \list{[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+    \advance\leftmargin\labelsep
+    \usecounter{enumi}}
+    \def\newblock{\hskip .11em plus .33em minus -.07em}
+    \sloppy
+    \sfcode`\.=1000\relax}
+  {\renewcommand\baselinestretch{\@spacing}\@normalsize\endlist}
 
 
 %    ****************************************

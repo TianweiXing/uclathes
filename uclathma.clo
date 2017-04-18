@@ -1,7 +1,7 @@
 % UCLA THESIS MACROS
-% (C) Copyright 2012 by Jose Hales-Garcia,
+% (C) Copyright 2017 by Louis Yang,
+% derived from work (C) Copyright 2012 by Jose Hales-Garcia,
 % derived from work (C) Copyright 1995 by John Heidemann,
-% (C) Copyright 1995 by John Heidemann,
 % derived from work (C) Copyright 1988 Richard B. Wales,
 % taken in turn from material Copyright (C) 1985 by Leslie Lamport.
 
@@ -53,7 +53,7 @@
 % The following commands set the year in which the degree will be
 % awarded, as well as the year of copyright.
 
-\def\@degreeyear{\number\month}
+\def\@degreeyear{\number\year} %Point out by shinjin-cr
 \def\@degreemonth{\ifcase\month\or
   January\or February\or March\or April\or May\or June\or
   July\or August\or September\or October\or November\or December\fi}
