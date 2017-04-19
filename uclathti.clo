@@ -358,13 +358,18 @@
    \end {tabular}
 }
 
-\newcommand\@printpubitem[1]{\par \noindent #1}
+\newcommand\@printpubitem[1]{\noindent #1\par}
 \newcommand{\customCV}[1]{\def\@customCV{#1}}
+\newcommand{\CVstretch}[1]{\def\@CVstretch{#1}}
 
 \newcommand\@makevitapage{
    % Save the old stretch.
    \let\OldArrayStretch=\arraystretch
-   \renewcommand\arraystretch{1.67}
+   \ifdefined\@CVstretch
+      \renewcommand\arraystretch{\@CVstretch}
+   \else
+      \renewcommand\arraystretch{1.67}
+   \fi
    \ColumnSave
    \par\pagestyle{plain}
    \ifnum\c@vitaitems>0
@@ -400,52 +405,51 @@
       \ifnum\c@vitaitems>24 \@printvitaitem{\@vitaY} \fi
       \ifnum\c@vitaitems>25 \@printvitaitem{\@vitaZ} \fi
    \fi
-   \if@bibinvita
-      \@customCV
-   \else
-	  \ifnum\c@publications>0
-         \ifx\@spacing\@doublespacing\parskip 24pt plus 4pt
-		 \else                       \parskip 12pt plus 2pt
-		 \fi
-		 \vskip 42pt
-		 \begin{center}
-		    \large \scshape
-		    \if@pubs
-			   \if@pres Publications and Presentations
-			   \else    Publications
-			   \fi
-			\else       Presentations
-			\fi
-			\\
-		 \end{center}
-		 \nobreak \vskip 12pt
-		 \ifnum\c@publications>0  \@printpubitem{\@pubA} \fi
-		 \ifnum\c@publications>1  \@printpubitem{\@pubB} \fi
-		 \ifnum\c@publications>2  \@printpubitem{\@pubC} \fi
-		 \ifnum\c@publications>3  \@printpubitem{\@pubD} \fi
-		 \ifnum\c@publications>4  \@printpubitem{\@pubE} \fi
-		 \ifnum\c@publications>5  \@printpubitem{\@pubF} \fi
-		 \ifnum\c@publications>6  \@printpubitem{\@pubG} \fi
-		 \ifnum\c@publications>7  \@printpubitem{\@pubH} \fi
-		 \ifnum\c@publications>8  \@printpubitem{\@pubI} \fi
-		 \ifnum\c@publications>9  \@printpubitem{\@pubJ} \fi
-		 \ifnum\c@publications>10 \@printpubitem{\@pubK} \fi
-		 \ifnum\c@publications>11 \@printpubitem{\@pubL} \fi
-		 \ifnum\c@publications>12 \@printpubitem{\@pubM} \fi
-		 \ifnum\c@publications>13 \@printpubitem{\@pubN} \fi
-		 \ifnum\c@publications>14 \@printpubitem{\@pubO} \fi
-		 \ifnum\c@publications>15 \@printpubitem{\@pubP} \fi
-		 \ifnum\c@publications>16 \@printpubitem{\@pubQ} \fi
-		 \ifnum\c@publications>17 \@printpubitem{\@pubR} \fi
-		 \ifnum\c@publications>18 \@printpubitem{\@pubS} \fi
-		 \ifnum\c@publications>19 \@printpubitem{\@pubT} \fi
-		 \ifnum\c@publications>20 \@printpubitem{\@pubU} \fi
-		 \ifnum\c@publications>21 \@printpubitem{\@pubV} \fi
-		 \ifnum\c@publications>22 \@printpubitem{\@pubW} \fi
-		 \ifnum\c@publications>23 \@printpubitem{\@pubX} \fi
-		 \ifnum\c@publications>24 \@printpubitem{\@pubY} \fi
-		 \ifnum\c@publications>25 \@printpubitem{\@pubZ} \fi
+   \ifnum\c@publications>0
+	  \ifx\@spacing\@doublespacing\parskip 24pt plus 4pt
+	  \else                       \parskip 12pt plus 2pt
 	  \fi
+	  \vskip 42pt
+	  \begin{center}
+		 \large \scshape
+		 \if@pubs
+		    \if@pres Publications and Presentations
+		    \else    Publications
+		    \fi
+		 \else       Presentations
+		 \fi
+		 \\
+	  \end{center}
+	  \nobreak \vskip 12pt
+	  \ifnum\c@publications>0  \@printpubitem{\@pubA} \fi
+	  \ifnum\c@publications>1  \@printpubitem{\@pubB} \fi
+	  \ifnum\c@publications>2  \@printpubitem{\@pubC} \fi
+	  \ifnum\c@publications>3  \@printpubitem{\@pubD} \fi
+	  \ifnum\c@publications>4  \@printpubitem{\@pubE} \fi
+	  \ifnum\c@publications>5  \@printpubitem{\@pubF} \fi
+	  \ifnum\c@publications>6  \@printpubitem{\@pubG} \fi
+	  \ifnum\c@publications>7  \@printpubitem{\@pubH} \fi
+	  \ifnum\c@publications>8  \@printpubitem{\@pubI} \fi
+	  \ifnum\c@publications>9  \@printpubitem{\@pubJ} \fi
+	  \ifnum\c@publications>10 \@printpubitem{\@pubK} \fi
+	  \ifnum\c@publications>11 \@printpubitem{\@pubL} \fi
+	  \ifnum\c@publications>12 \@printpubitem{\@pubM} \fi
+	  \ifnum\c@publications>13 \@printpubitem{\@pubN} \fi
+	  \ifnum\c@publications>14 \@printpubitem{\@pubO} \fi
+	  \ifnum\c@publications>15 \@printpubitem{\@pubP} \fi
+	  \ifnum\c@publications>16 \@printpubitem{\@pubQ} \fi
+	  \ifnum\c@publications>17 \@printpubitem{\@pubR} \fi
+	  \ifnum\c@publications>18 \@printpubitem{\@pubS} \fi
+	  \ifnum\c@publications>19 \@printpubitem{\@pubT} \fi
+	  \ifnum\c@publications>20 \@printpubitem{\@pubU} \fi
+	  \ifnum\c@publications>21 \@printpubitem{\@pubV} \fi
+	  \ifnum\c@publications>22 \@printpubitem{\@pubW} \fi
+	  \ifnum\c@publications>23 \@printpubitem{\@pubX} \fi
+	  \ifnum\c@publications>24 \@printpubitem{\@pubY} \fi
+	  \ifnum\c@publications>25 \@printpubitem{\@pubZ} \fi
+   \fi
+   \ifdefined\@customCV
+      \@customCV
    \fi
    \ColumnRestore
    \renewcommand\arraystretch{\OldArrayStretch}
@@ -506,7 +510,7 @@
 	\begin{minipage}{4.75in}
 	\setlength{\parindent}{1.5em}
 	\@abstract
-        \end{minipage}
+    \end{minipage}
 	\end{center}
       }{
 	\@abstract
