@@ -60,6 +60,8 @@
 %			      TITLE PAGE			       %
 %								       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 2017 Requirements: Do not bold name or other items on page; bolding 
+%                    title is at the discretion of your committee.
 
 \newcommand\@maketitlepage{
    \begin {titlepage}
@@ -71,13 +73,13 @@
          \textbf{\@titlesize \@title} \\
          \vskip 48pt plus0pt minus18pt
          \normalsize A \@thesisname\
-	 submitted in partial satisfaction \\
+         submitted in partial satisfaction \\
          of the requirements for the degree \\
          \@degreename\if@department\ in \@department \fi \\
          \vskip 24pt plus0pt minus6pt
          by \\
          \vskip 24pt plus0pt minus6pt
-         \textbf{\large \@author} \\
+         \large \@author \\ % bolding has been removed (2017, Louis)
          \vfill
          {\normalsize \@degreeyear}
       \end {center}
@@ -480,7 +482,7 @@
          \textsc{\large Abstract of the \@Thesisname}\\[12pt]
          \textbf{\@titlesize \@title}\\[12pt]
          \normalsize \normalfont by\\[12pt]
-         \textbf{\large \@author} \\
+         \large \@author \\ % bolding has been removed (2017, Louis)
          \normalsize \normalfont
 	 \@degreename\if@department\ in \@department \fi\\
          University of California, Los Angeles, \@degreeyear \\
