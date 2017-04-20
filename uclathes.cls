@@ -502,6 +502,25 @@
 %  \sfcode`\.=1000\relax --
 %      Causes a `.' (period) not to produce an end-of-sentence space.
 
+\def\newblock{\hskip .11em\@plus.33em\@minus.07em}
+% Louis: I moved this outside of thebibliography environment so that this
+%        class can be compatible with the 'Natbib' package.
+
+% Natbib: If you are using 'natbib' package, the following 'thebibliography'
+%         environment will be overwritten by the 'Natbib' package. You will
+%         need to add the following commands:
+%
+%         \renewcommand{\bibname}{References}
+%         \renewcommand{\bibpreamble}{
+%             \addcontentsline{toc}{chapter}{References}
+%             \vskip 12pt
+%             \renewcommand\baselinestretch{1}
+%         }
+%         \renewcommand{\bibfont}{\normalsize}
+%
+%         after you load the 'natbib' package so that the format and spacing
+%         is consistent with this template.
+
 \newenvironment{thebibliography}[1]{\chapter*{References\markboth
   {REFERENCES}{REFERENCES}}
   \addcontentsline{toc}{chapter}{References}
@@ -510,7 +529,7 @@
   \list{[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
     \advance\leftmargin\labelsep
     \usecounter{enumi}}
-    \def\newblock{\hskip .11em plus .33em minus -.07em}
+    %\def\newblock{\hskip .11em plus .33em minus -.07em}
     \sloppy
     \sfcode`\.=1000\relax}
   {\endlist\renewcommand\baselinestretch{\@spacing}\@normalsize}
@@ -526,8 +545,9 @@
 %
 % This provides the publications environment in Vita page. It is modified from
 % the thebibliography environment.
-% Note: the name \thepublications has already been used by the
-%       \newcounter{publications} so here we use \mypublications
+% Note: the name 'thepublications' has already been used by the
+%       \newcounter{publications} so here we name the new environment as 
+%       'mypublications'.
 
 \newenvironment{mypublications}[1]{
   \begin{center}
@@ -539,7 +559,7 @@
   \list{[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
     \advance\leftmargin\labelsep
     \usecounter{enumi}}
-    \def\newblock{\hskip .11em plus .33em minus -.07em}
+    %\def\newblock{\hskip .11em plus .33em minus -.07em}
     \sloppy
     \sfcode`\.=1000\relax}
   {\endlist\renewcommand\baselinestretch{\@spacing}\@normalsize}
