@@ -66,22 +66,23 @@
 \newcommand\@maketitlepage{
    \begin {titlepage}
       \ColumnSave
+      \normalsize \normalfont
       \begin {center}
-         \textsc{\large University of California} \\
-         \normalsize Los Angeles \\
+         \MakeUppercase{University of California} \\
+         Los Angeles \\
          \vfill
-         \textbf{\@titlesize \@title} \\
-         \vskip 48pt plus0pt minus18pt
-         \normalsize A \@thesisname\
+         \@title \\
+         \vskip 48pt minus 12pt
+         A \@thesisname\
          submitted in partial satisfaction \\
          of the requirements for the degree \\
          \@degreename\if@department\ in \@department \fi \\
-         \vskip 24pt plus0pt minus6pt
+         \vskip 24pt minus 6pt
          by \\
-         \vskip 24pt plus0pt minus6pt
-         \large \@author \\ % bolding has been removed (2017, Louis)
+         \vskip 24pt minus 6pt
+         \@author \\ % bolding has been removed (2017, Louis)
          \vfill
-         {\normalsize \@degreeyear}
+         \@degreeyear
       \end {center}
       \ColumnRestore
    \end {titlepage}
@@ -155,8 +156,7 @@
 % changed, it may be desirable to change the "\vskip" before the name.
 
 \newcommand\@signatureline[1]{
-   #1
-   
+   #1\par   
    %\vskip-10pt{#1} \\
    %\vskip 24pt plus0pt minus15pt
 }
@@ -196,10 +196,9 @@
          \@signatureline{\@chairA, Committee Chair}
       \else\typeout{No committee chair.}
       \fi\fi\fi
-   \end {center}
-   \vskip 36pt
-   \begin {center}
-      University of California, Los Angeles \\ \@degreeyear
+      \vskip 48pt minus 12pt
+      University of California, Los Angeles\par
+      \@degreeyear
    \end {center}
    \ColumnRestore
    \renewcommand\baselinestretch{\@spacing}\@normalsize
@@ -478,13 +477,16 @@
       \pagenumbering{roman}
       \setcounter{page}{2}
       \par\pagestyle{plain}
+      \normalsize \normalfont
       \begin{center}
-         \textsc{\large Abstract of the \@Thesisname}\\[12pt]
-         \textbf{\@titlesize \@title}\\[12pt]
-         \normalsize \normalfont by\\[12pt]
-         \large \@author \\ % bolding has been removed (2017, Louis)
-         \normalsize \normalfont
-	 \@degreename\if@department\ in \@department \fi\\
+         \MakeUppercase{Abstract of the \@Thesisname} \\
+         \vskip 24pt minus 6pt
+         \@title \\
+         \vskip 24pt minus 6pt
+         by \\
+         \vskip 24pt minus 6pt
+         \@author \\ % bolding has been removed (2017, Louis)
+         \@degreename\if@department\ in \@department \fi\\
          University of California, Los Angeles, \@degreeyear \\
          \ifnum\c@chairs>2
             Professor \@chairA, Co-chair \\
@@ -508,19 +510,19 @@
       % as well use the whole \textwidth.
       %
       \ifthenelse{\equal{#1}{\@stdsinglespacing}}{
-	\begin{center}
-	\begin{minipage}{4.75in}
-	\setlength{\parindent}{1.5em}
-	\@abstract
-    \end{minipage}
-	\end{center}
+         \begin{center}
+            \begin{minipage}{4.75in}
+               \setlength{\parindent}{1.5em}
+               \@abstract
+            \end{minipage}
+         \end{center}
       }{
-	\@abstract
+         \@abstract
       }
 
       \renewcommand\baselinestretch{\@spacing}\@normalsize
       \ColumnRestore
-  \else
+   \else
       \typeout{No abstract.}
    \fi
 }
