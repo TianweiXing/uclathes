@@ -1,6 +1,7 @@
-
 uclathes
 ------------
+2017/04/28, release 3.13
+
 2012/05/02, release 2.0
 
 
@@ -14,6 +15,28 @@ Jose Hales-Garcia.
 
 Several theses and dissertations have been approved based on this
 style package.
+
+WHAT IS NEW WITH UCLATHES 3?
+------------------------------
+v3.13
+2017 rules require no bold face and all equal size font on the title and
+abstract pages. [These rules were not stated in the Thesis &
+Dissertation Filing Requirements PDF but was emphasized in the 2017
+Spring Electronic Thesis and Dissertation (ETD) Workshops by Academic
+Services, UCLA Graduate Division.]
+
+v3.11
+To make it compatible with the 'natbib' package.
+
+v3.1
+Allows customized publication list in vita page, see 'demo2.tex' for the example.
+Fix the bug in \degreeyear.
+
+v3.0 beta
+Correct the table width in the vita page.
+Correct the order of committee members.
+Fix page size to US letter size.
+Correct the margins to 1 inch on all sides and 0.75 inch for page numbers.
 
 WHAT IS NEW WITH UCLATHES 2.0?
 ------------------------------
@@ -51,26 +74,26 @@ Enclosed in this package are the following files:
 	These three files implement the LaTeX2e "uclathes" document class.
 
     uclathes.bst
-	This file implements the BibTeX "uclathes" bibliography style.
-
-    thesdoc.tex, thesdoc.pdf
-	A document describing the "uclathes" style material.
+	This file implements the BibTeX "uclathes" bibliography style. (Optional)
 
     demo.tex, demo.pdf
 	The "demo thesis" described in thesdoc.tex.
 
-    Makefile
-	Automates TeX'ing documents.
+    demo2.tex, demo2.pdf
+	The new demo tex file for v3.X.
 
     README
 	The file you are now reading.
 
+    thesdoc.tex, thesdoc.pdf
+	The old document describing the "uclathes" style material.
 
-HOW TO INSTALL UCLATHES
+
+HOW TO USE UCLATHES
 -----------------------
 
-The simplest way to install uclathes is to copy *.cls, *.clo, and *.bst
-into the directory where you run LaTeX.
+Copy *.cls, *.clo, and *.bst (optional) files into the directory
+where you run your .tex file.
 
 Alternatively, you can copy these files into wherever LaTeX looks
 for its inputs.
@@ -81,45 +104,14 @@ WHERE'S THE REAL DOCUMENTATION
 
 Rich Wales has prepared a good manual for uclathes.
 Read thesdoc.pdf (or format and read thesdoc.tex) before
-proceeding.
+proceeding. (Not update for v3.0 yet.)
 
 
 WHERE TO GET UCLATHES
 ---------------------
 
 The most recent version of this package can be found at
-<URL:https://github.com/jolohaga/uclathes>.
-
-
-ISPELL GOBBLYGOOK
------------------
-
- LocalWords:  uclathes Dorab Patel Eduardo Krell cls uclath clo uclathti bst ps
- LocalWords:  BibTeX thesdoc tex README vesion URL http www html mac rep ti isi
-
-
-KNOWN PROBLEMS
---------------
-
-1.  \bf doesn't work, I get the error:
-	! Undefined control sequence.
-	l.214 \item{\bf
-	               {Air Interface:}}
-
-You're running LaTeX2e, and \bf isn't enabled by default.  You should
-choose if you want new or old semantics and put \usepackage{newlfont}
-or \usepackage{oldlfont} in your document.
-
-I purposely did not include one of these packages in uclathes.cls to
-encourage people to convert to the new macros.
-
-
-2.  If you don't specify a \degreeyear, the value on the title page
-may be wrong.  (This bug occurs in demo.pdf.)
-
-Work around:  always specify \degreeyear.
-
-Alternate work around:  find a real uclathes maintainer to fix the bug.
+<URL:https://github.com/louis925/uclathes/>.
 
 
 WHAT TO DO ABOUT BUGS
@@ -129,22 +121,7 @@ If a thesis formatted with uclathes is rejected by the
 Theses and Dissertations Advisor, please let me know
 and I will update it accordingly.
 
-The uclathes package is for LaTeX2e.  If you're running LaTeX 2.09,
-you should use the package "thesis.tar" (also available from
-<URL:http://www.isi.edu/~johnh/uclathes.html>) instead.
-
-
-UCLATHES NEEDS NEW MAINTAINER (Obsolete)
------------------------------
-
-I've graduated and left UCLA so I'm looking for a new maintainer of
-uclathes.  You could be the one!  Send me mail if you're interested.
-
-
-ISPELL FOOLISHNESS
-------------------
-
- LocalWords:  TeX'ing GOBBLYGOOK LocalWords bf
+The uclathes package is for LaTeX2e.
 
 
 REPLY-WARE
@@ -155,6 +132,5 @@ graduate, you're strongly encouraged to send me some e-mail to let me
 know that my work was not in vain.
 
 
-  ---John Heidemann, 12 Jan 1996
-     johnh@isi.edu
-
+  ---Louis Yang, April 28, 2017
+     louis.yang@physics.ucla.edu
