@@ -71,7 +71,7 @@
          \MakeUppercase{University of California} \\
          Los Angeles \\
          \vfill
-         \@title \\
+         \@title \normalsize \normalfont \\
          \vskip 48pt minus 12pt
          A \@thesisname\
          submitted in partial satisfaction \\
@@ -80,7 +80,7 @@
          \vskip 24pt minus 6pt
          by \\
          \vskip 24pt minus 6pt
-         \@author \\ % bolding has been removed (2017, Louis)
+         \@author \normalsize \normalfont \\ % bolding has been removed (2017, Louis)
          \vfill
          \@degreeyear
       \end {center}
@@ -239,13 +239,20 @@
 \def\@acknowledgments{}
 \newcommand\acknowledgments[1]{\@ackstrue\def\@acknowledgments{#1}}
 
+% Modified by Louis 2017
+\newcommand\acksname{Acknowledgments} % Allows user to change later
 \newcommand\@makeacknowledgmentsheading{
-  {
-    \centering
-    \textsc{\large Acknowledgments}
-    \vskip 12pt
-  }
+   \chapter*{\acksname}% Change it to a chapter so that toc is correct
+   \markboth{\MakeUppercase\acksname}{\MakeUppercase\acksname}%
+   \addcontentsline{toc}{chapter}{\acksname}% Add to toc 
 }
+% \newcommand\@makeacknowledgmentsheading{
+%   {
+%     \centering
+%     \textsc{\large Acknowledgments}
+%     \vskip 12pt
+%   }
+% }
 
 
 \newcommand\@makeacknowledgments{
@@ -362,6 +369,7 @@
 \newcommand\@printpubitem[1]{\noindent #1\par}
 \newcommand{\customCV}[1]{\def\@customCV{#1}}
 \newcommand{\CVstretch}[1]{\def\@CVstretch{#1}}
+\newcommand\vitaname{Vita} % Allows user to change later
 
 \newcommand\@makevitapage{
    % Save the old stretch.
@@ -375,10 +383,12 @@
    \par\pagestyle{plain}
    \ifnum\c@vitaitems>0
       \renewcommand\baselinestretch{\@spacing}\@normalsize
-      \begin{center}
-         \textsc{\large Vita} \\
-      \end{center}
-      \vskip 12pt
+	  \chapter*{\vitaname}% Changes this to a chapter*
+	  \addcontentsline{toc}{chapter}{\vitaname}%
+%      \begin{center}
+%         \textsc{\large Vita} \\
+%      \end{center}
+%      \vskip 12pt
       \ifnum\c@vitaitems>0  \@printvitaitem{\@vitaA} \fi
       \ifnum\c@vitaitems>1  \@printvitaitem{\@vitaB} \fi
       \ifnum\c@vitaitems>2  \@printvitaitem{\@vitaC} \fi
@@ -481,11 +491,11 @@
       \begin{center}
          \MakeUppercase{Abstract of the \@Thesisname} \\
          \vskip 24pt minus 6pt
-         \@title \\
+         \@title \normalsize \normalfont \\
          \vskip 24pt minus 6pt
          by \\
          \vskip 24pt minus 6pt
-         \@author \\ % bolding has been removed (2017, Louis)
+         \@author \normalsize \normalfont \\ % bolding has been removed (2017, Louis)
          \@degreename\if@department\ in \@department \fi\\
          University of California, Los Angeles, \@degreeyear \\
          \ifnum\c@chairs>2
@@ -548,8 +558,12 @@
   \@makesignaturepage
   \@makededication
   \tableofcontents
-  \listoffigures
-  \listoftables
+  \ifLOF
+    \listoffigures
+  \fi
+  \ifLOT
+    \listoftables
+  \fi
   \@makeacknowledgments
   \@makevitapage
   \newpage \pagenumbering{arabic}

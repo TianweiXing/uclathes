@@ -113,29 +113,33 @@
 
 
 % SIDE MARGINS:
-%\oddsidemargin 0in     %   Note that \oddsidemargin = \evensidemargin
+%\oddsidemargin 0in
 %\evensidemargin 0in    
 % Louis: these setting makes the margin non-symmetry. The default latex
-%   margins are already 1 inch on both sides. 
+%   margins are already 1 inch on the left and upper sides. 
 
 % VERTICAL SPACING:        
                           % Top of page:
-\topmargin 0pt            %    Nominal distance from top of page to top
-                          %    of box containing running head.
-\headheight 0pt           %    Height of box containing running head.
-\headsep 0pt              %    Space between running head and text.
+%\topmargin 0pt           %    Distance from top of the header to the top
+                          %    margin. (Not using this)
+%\headheight 0pt          %    Height of the header. (Not using this)
+\headsep 0pt              %    Space between the header and the text.
                           % Bottom of page:
-\footskip 0.25in            %    Distance from baseline of box containing
-                            %    foot to baseline of last line of text.
-% Louis: footskip -> 0.25 in so that the page number is 0.75 in from bottom
-% johnh: footskip -> 0.8in from 0.6in to meet RFTADP guidelines
-% (probably with LaTeX209 footheight was added to footskip).
+\footskip 0.40in          %    Distance from baseline of box containing
+                          %    foot to baseline of last line of text.
+% Louis: footskip -> 0.40in so that the page number is 0.75" in from bottom
 
 % DIMENSION OF TEXT:
 
-\textheight 9in          % Height of text (including footnotes and fig-
+\textheight 8.85in       % Height of text (including footnotes and fig-
                          % ures, excluding running head and foot).
+% To have 0.75" space from the bottom of the page to the page number, the \textheight needs to be:
+% 11in (\paperheight) - 1in (top) - 0.75in (page#) - 0.40in (\footskip)
+% = 8.85in
 \textwidth 6.5in         % Width of text line.
+% To have 1in margin on the right side for letter size paper, which have 
+% 8.5in width, the textwidth needs to be:
+% 8.5in (\paperwidth) - 1in (left and right) * 2 = 6.5in
 
 % A \raggedbottom command causes 'ragged bottom' pages: pages set to
 % natural height instead of being stretched to exactly \textheight.

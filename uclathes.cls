@@ -197,6 +197,17 @@
 \DeclareOption{nohyphenatetitles}{\setboolean{hyphenatetitles}{false}}
 \DeclareOption{hyphenatetitles}{\setboolean{hyphenatetitles}{true}}
 
+%
+% Option to turn off "List of Figures", or "List of Tables"  
+% added 2017 by Louis
+\newif\ifLOF % Control List of Figures
+\newif\ifLOT % Control List of Tables
+\LOFtrue % Default is true
+\LOTtrue % Default is true
+\DeclareOption{nolistoffigures}{\LOFfalse}
+\DeclareOption{nolistoftables}{\LOTfalse}
+% \makeintropages will response to these settings
+
 % The \ProcessOptions command does the options.
 
 \ProcessOptions
@@ -429,11 +440,20 @@
 \def\@dotsep{4.5}
 \setcounter{tocdepth}{2}
 
-% TABLEOFCONTENTS
+% TABLE OF CONTENTS
+%
 
-\def\tableofcontents{
-\chapter*{Table of Contents\markboth{CONTENTS}{CONTENTS}}
-\renewcommand\baselinestretch{\@spacing}\@normalsize\@starttoc{toc}}
+\newcommand\contentsname{Table of Contents} % Allows user to change later
+\newcommand\tableofcontents{%
+    \chapter*{\contentsname%
+        \markboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+    \renewcommand\baselinestretch{\@spacing}%
+	\@normalsize%
+    \@starttoc{toc}%
+    }
+% \def\tableofcontents{
+% \chapter*{Table of Contents\markboth{CONTENTS}{CONTENTS}}
+% \renewcommand\baselinestretch{\@spacing}\@normalsize\@starttoc{toc}}
 
 \def\l@part#1#2{\addpenalty{-\@highpenalty}
    \addvspace{2.25em plus 1pt}  % space above part line
@@ -465,25 +485,43 @@
 \def\l@paragraph{\@dottedtocline{4}{10em}{5em}}
 \def\l@subparagraph{\@dottedtocline{5}{12em}{6em}}
 
+
 % LIST OF FIGURES
 %
-\newif\if@figures
-\@figurestrue  % rbw did this in \makeintropages; I moved it here.  ---johnh 950825
-\def\listoffigures{
-  \if@figures\chapter*{List of Figures\markboth
-   {LIST OF FIGURES}{LIST OF FIGURES}}\@starttoc{lof}\fi}
+% Modified from the standard "article.cls" class by Louis 2017
 
-\def\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
+\newcommand\listfigurename{List of Figures} % Allows user to change the name later
+\newcommand\listoffigures{%
+    \chapter*{\listfigurename}% Appears as a chapter* 
+    \markboth{\MakeUppercase\listfigurename}{\MakeUppercase\listfigurename}%
+	\addcontentsline{toc}{chapter}{\listfigurename}
+    \@starttoc{lof}%
+    }
+\newcommand*\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
+%\newif\if@figures
+%\def\listoffigures{%
+%  \if@figures
+%    \chapter*{List of Figures\markboth{LIST OF FIGURES}{LIST OF FIGURES}}%
+%    \@starttoc{lof}%
+%  \fi}
+%\def\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
+
 
 % LIST OF TABLES
 %
-\newif\if@tables
-\@tablestrue  % rbw did this in \makeintropages; I moved it here.  ---johnh 950825
-\def\listoftables{
-  \if@tables\chapter*{List of Tables\markboth
-   {LIST OF TABLES}{LIST OF TABLES}}\@starttoc{lot}\fi}
+% Modified from the standard "article.cls" class by Louis 2017
 
+\newcommand\listtablename{List of Tables} % Allows user to change the name later
+\newcommand\listoftables{%
+    \chapter*{\listtablename}%
+    \markboth{\MakeUppercase\listtablename}{\MakeUppercase\listtablename}%
+    \addcontentsline{toc}{chapter}{\listtablename}
+    \@starttoc{lot}%
+    }
 \let\l@table\l@figure
+%\def\listoftables{
+%  \iftables\chapter*{List of Tables\markboth
+%   {LIST OF TABLES}{LIST OF TABLES}}\@starttoc{lot}\fi}
 
 
 %    ****************************************
@@ -503,8 +541,8 @@
 %      Causes a `.' (period) not to produce an end-of-sentence space.
 
 \def\newblock{\hskip .11em\@plus.33em\@minus.07em}
-% Louis: I moved this outside of thebibliography environment so that this
-%        class can be compatible with the 'Natbib' package.
+% Louis: I moved \newblock outside of thebibliography environment so that 
+%        this class can be compatible with the 'Natbib' package.
 
 % Natbib: If you are using 'natbib' package, the following 'thebibliography'
 %         environment will be overwritten by the 'Natbib' package. You will
@@ -521,9 +559,11 @@
 %         after you load the 'natbib' package so that the format and spacing
 %         is consistent with this template.
 
-\newenvironment{thebibliography}[1]{\chapter*{References\markboth
-  {REFERENCES}{REFERENCES}}
-  \addcontentsline{toc}{chapter}{References}
+\newcommand\refname{References} % Allows user to change it later
+\newenvironment{thebibliography}[1]
+  {\chapter*{\refname\markboth
+  {\MakeUppercase\refname}{\MakeUppercase\refname}}
+  \addcontentsline{toc}{chapter}{\refname}
   \renewcommand\baselinestretch{1}
   \@normalsize
   \list{[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
@@ -700,31 +740,49 @@
 
 % FIGURE
 %
+% Modified from the standard "article.cls" class by Louis 2017
+\newcommand\figurename{Figure} % Allows user to modify the name later
 \newcounter{figure}[chapter]
 \def\thefigure{\thechapter.\@arabic\c@figure}
 
 \def\fps@figure{tbp}
 \def\ftype@figure{1}
 \def\ext@figure{lof}
-\def\fnum@figure{Figure \thefigure}
-\def\figure{\@figurestrue\@float{figure}}
-\let\endfigure\end@float
-\@namedef{figure*}{\@figurestrue\@dblfloat{figure}}
-\@namedef{endfigure*}{\end@dblfloat}
+\def\fnum@figure{\figurename\nobreakspace\thefigure}
+\newenvironment{figure}
+               {\@float{figure}}
+               {\end@float}
+\newenvironment{figure*}
+               {\@dblfloat{figure}}
+               {\end@dblfloat}
+% \def\fnum@figure{Figure \thefigure}
+% \def\figure{\@figurestrue\@float{figure}} % \@figurestrue do nothing since it will always run after the list of figure has been made
+% \let\endfigure\end@float
+% \@namedef{figure*}{\@figurestrue\@dblfloat{figure}}
+% \@namedef{endfigure*}{\end@dblfloat}
 
 % TABLE
 %
+% Modified from the standard "article.cls" class by Louis 2017
+\newcommand\tablename{Table} % Allows user to modify the name later
 \newcounter{table}[chapter]
 \def\thetable{\thechapter.\@arabic\c@table}
 
 \def\fps@table{tbp}
 \def\ftype@table{2}
 \def\ext@table{lot}
-\def\fnum@table{Table \thetable}
-\def\table{\@tablestrue\@float{table}}
-\let\endtable\end@float
-\@namedef{table*}{\@tablestrue\@dblfloat{table}}
-\@namedef{endtable*}{\end@dblfloat}
+\def\fnum@table{\tablename\nobreakspace\thetable}
+\newenvironment{table}
+               {\@float{table}}
+               {\end@float}
+\newenvironment{table*}
+               {\@dblfloat{table}}
+               {\end@dblfloat}
+% \def\fnum@table{Table \thetable}
+% \def\table{\@tablestrue\@float{table}}
+% \let\endtable\end@float
+% \@namedef{table*}{\@tablestrue\@dblfloat{table}}
+% \@namedef{endtable*}{\end@dblfloat}
 
 
 %    ****************************************
