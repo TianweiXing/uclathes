@@ -1,6 +1,8 @@
 uclathes
 ------------
-2017/04/28, release 3.13
+2017/05/31, release 3.3
+
+2017/04/28, release 3.1.3
 
 2012/05/02, release 2.0
 
@@ -18,14 +20,27 @@ style package.
 
 WHAT IS NEW WITH UCLATHES 3?
 ------------------------------
-v3.13
+v3.3
+1. Includes "List of Figures", "List of Table", "Acknowledgments", and
+"Vita" pages into the "Table of Contents".
+2. Allows users to change the titles of Table of Contents
+(\contentsname), List of Figures (\listfigurename), List of Table
+(\listtablename), Acknowledgments page (\acksname), Vita page
+(\vitaname), and References (\refname).
+3. Provides new class options to turn off List of Figures (nolistoffigures)
+and List of Tables (nolistoftables).
+4. Update demo2.tex to demonstrate how to use new features.
+5. Increases \footskip to 0.4 inches while keeping the distance from
+page number to bottom of the page as 0.75 inches.
+
+v3.1.3
 2017 rules require no bold face and all equal size font on the title and
 abstract pages. [These rules were not stated in the Thesis &
 Dissertation Filing Requirements PDF but was emphasized in the 2017
 Spring Electronic Thesis and Dissertation (ETD) Workshops by Academic
 Services, UCLA Graduate Division.]
 
-v3.11
+v3.1.1
 To make it compatible with the 'natbib' package.
 
 v3.1
@@ -80,7 +95,7 @@ Enclosed in this package are the following files:
 	The "demo thesis" described in thesdoc.tex.
 
     demo2.tex, demo2.pdf
-	The new demo tex file for v3.X.
+	The new demo tex file for v3.X showing a more practical example.
 
     README
 	The file you are now reading.
