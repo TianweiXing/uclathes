@@ -60,13 +60,13 @@
 %			      TITLE PAGE			       %
 %								       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% 2017 Requirements: Do not bold name or other items on page; bolding 
-%                    title is at the discretion of your committee.
+% 2017 Requirements: Do not bold anything on title and abstract pages;
 
 \newcommand\@maketitlepage{
    \begin {titlepage}
       \ColumnSave
       \normalsize \normalfont
+      \ifdefined\pdfbookmark\pdfbookmark{Title Page}{titlepage}\fi
       \begin {center}
          \MakeUppercase{University of California} \\
          Los Angeles \\
@@ -103,6 +103,7 @@
 
 \newcommand\@makecopyrightpage{
    \ColumnSave
+%   \ifdefined\pdfbookmark\pdfbookmark{Copyright}{copyright}\fi
    \thispagestyle{empty}
    \null
    \vfill
@@ -113,7 +114,8 @@
          %\ by \@author \\
          %\@copyrightinfo
          \normalsize \normalfont \copyright\ Copyright by \\
-         \@author \\ \@copyrightyear
+         \@author \\
+         \@copyrightyear
       \end{center}
    \fi
    \ColumnRestore
@@ -156,19 +158,21 @@
 % changed, it may be desirable to change the "\vskip" before the name.
 
 \newcommand\@signatureline[1]{
-   #1\par   
+   #1\par%
    %\vskip-10pt{#1} \\
    %\vskip 24pt plus0pt minus15pt
 }
 
 \newcommand\@makesignaturepage{
    \ColumnSave
+   \ifdefined\pdfbookmark\pdfbookmark{Committee}{committee}\fi
    \noindent
    \renewcommand\baselinestretch{\@doublespacing}\@normalsize
-   \normalsize \normalfont The \@thesisname\ of \@author\ is approved.
+   \normalsize \normalfont The \@thesisname\ of \@author\ is approved.\par%
    %\vskip 12pt plus0pt minus24pt
-   
-   \begin {center}
+   {\centering % Need \centering instead of \begin{center} to avoid extra 
+   % line spacing (2017 Thesis & Dissertation Filing Requirements).
+   %\begin {center}
       % Non-chair committee members
       \ifnum\c@members>0 \@signatureline{\@memberA}
          \ifnum\c@members>1 \@signatureline{\@memberB}
@@ -196,10 +200,11 @@
          \@signatureline{\@chairA, Committee Chair}
       \else\typeout{No committee chair.}
       \fi\fi\fi
-      \vskip 48pt minus 12pt
-      University of California, Los Angeles\par
-      \@degreeyear
-   \end {center}
+      \vskip 6em
+	  University of California, Los Angeles\par
+      \@degreeyear\par % Need to end with \par to avoid \centering not end issue
+   }
+   %\end {center}
    \ColumnRestore
    \renewcommand\baselinestretch{\@spacing}\@normalsize
 }
@@ -217,6 +222,7 @@
 \newcommand\@makededication{
    \if@dedication
       \ColumnSave
+      \ifdefined\pdfbookmark\pdfbookmark{Dedication}{dedication}\fi
       \par\pagestyle{plain}
       \renewcommand\baselinestretch{\@spacing}\@normalsize\normalfont
       \vspace*{0pt}		% force spacing at top of page
@@ -484,6 +490,7 @@
 \newcommand{\@makeabstractpage}[1]{
    \if@abstract
       \ColumnSave
+      \ifdefined\pdfbookmark\pdfbookmark{Abstract}{abstract}\fi
       \pagenumbering{roman}
       \setcounter{page}{2}
       \par\pagestyle{plain}

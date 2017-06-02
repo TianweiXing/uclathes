@@ -1,5 +1,7 @@
 uclathes
 ------------
+2017/06/02, relaeas 3.4
+
 2017/05/31, release 3.3
 
 2017/04/28, release 3.1.3
@@ -20,6 +22,13 @@ style package.
 
 WHAT IS NEW WITH UCLATHES 3?
 ------------------------------
+v3.4
+1. Automatically adds additional PDF bookmarks for "Title Page", "Abstract", 
+"Committee", "Dedication", and "Table of Contents" when using the "hyperref" 
+package.
+2. Reduce the spacing between the first and second lines in the committee page
+to conform the 2017 requirements.
+
 v3.3
 1. Includes "List of Figures", "List of Table", "Acknowledgments", and
 "Vita" pages into the "Table of Contents".

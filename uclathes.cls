@@ -1,5 +1,7 @@
 %
 % UCLA THESIS/DISSERTATION CLASS -- for LaTeX version 2e
+%   (C) Copyright 2017 by Louis Yang.
+% Taken from jolohaga/uclathes
 %	(C) Copyright 2012 by Jose Hales-Garcia.
 % Taken from UCLATHES
 %	(C) Copyright 1995 by John Heidemann.
@@ -10,11 +12,6 @@
 %	by Dorab Patel and Eduardo Krell
 % Taken from REPORT style
 %	[Copyright (C) 1985 by Leslie Lamport]
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Please send comments about this style to:
-% Jose Hales-Garcia <jolohaga@me.com>.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -71,10 +68,6 @@
 %             department name is officially unnecessary (such as when an
 %             "EdD" or customized degree title is specified).
 %
-%         \degreemonth{X}
-%             Set the month in which the degree will be awarded to "X".
-%             Default is the current month.
-%
 %         \degreeyear{X}
 %             Set the year in which the degree will be awarded to "X".
 %             Default is the current year.
@@ -88,13 +81,6 @@
 %         \nocopyright
 %             Don't include a copyright notice at all.  A completely
 %             blank "copyright" page will be produced instead.
-%
-%         \titlesize{X}
-%             Print the document title (on the "title" and "abstract"
-%             pages) in "X" size type.  Default is "Large" (17-point).
-%             Although any LaTeX type size name will be accepted, the
-%             only non-default value likely to give satisfactory results
-%             is "LARGE" (20-point).
 %
 %         \chair{X}
 %             The committee chair's name is "X".  There may be up to
@@ -156,7 +142,6 @@
 \def\uclathesdate{2012/05/02}
 \ProvidesClass{uclathes}[\uclathesdate, \uclathesversion]
 \typeout{UCLA 2.0 port copyright (C) 2012 by Jose Hales-Garcia.}
-\typeout{Please send bug reports and graduation notices to <jolohaga@me.com>.}
 \typeout{LaTeX2e port copyright (C) 1995 by John Heidemann.}
 \typeout{Copyright (C) 1988 by Richard B. Wales, copyright (C) 1985 by Leslie Lamport.}
 
@@ -200,10 +185,10 @@
 %
 % Option to turn off "List of Figures", or "List of Tables"  
 % added 2017 by Louis
-\newif\ifLOF % Control List of Figures
-\newif\ifLOT % Control List of Tables
-\LOFtrue % Default is true
-\LOTtrue % Default is true
+\newif\ifLOF % Control if showing List of Figures
+\newif\ifLOT % Control if showing List of Tables
+\LOFtrue % Default is showing List of Figures
+\LOTtrue % Default is showing List of Tables
 \DeclareOption{nolistoffigures}{\LOFfalse}
 \DeclareOption{nolistoftables}{\LOTfalse}
 % \makeintropages will response to these settings
@@ -212,7 +197,7 @@
 
 \ProcessOptions
 
-% The "uclath12.sty" file defines things that depend on the type size.
+% The "uclath12.clo" file defines things that depend on the type size.
 % In order to meet the UCLA requirements for minimum size of print in a
 % thesis or dissertation, only one size (12-point) is supported.
 
@@ -445,8 +430,11 @@
 
 \newcommand\contentsname{Table of Contents} % Allows user to change later
 \newcommand\tableofcontents{%
-    \chapter*{\contentsname%
-        \markboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}}%
+    \chapter*{%
+        \ifdefined\pdfbookmark\pdfbookmark{\contentsname}{contents}\fi%
+        \contentsname%        
+    }%
+    \markboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
     \renewcommand\baselinestretch{\@spacing}%
 	\@normalsize%
     \@starttoc{toc}%
@@ -540,11 +528,26 @@
 %  \sfcode`\.=1000\relax --
 %      Causes a `.' (period) not to produce an end-of-sentence space.
 
+\newcommand\refname{References} % Allows user to change it later
+\newenvironment{thebibliography}[1]{%
+  \chapter*{\refname}%
+  \markboth{\MakeUppercase\refname}{\MakeUppercase\refname}%
+  \addcontentsline{toc}{chapter}{\refname}
+  \renewcommand\baselinestretch{1}
+  \@normalsize
+  \list{[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+    \advance\leftmargin\labelsep
+    \usecounter{enumi}}
+    %\def\newblock{\hskip .11em plus .33em minus -.07em}
+    \sloppy
+    \sfcode`\.=1000\relax}
+  {\endlist\renewcommand\baselinestretch{\@spacing}\@normalsize}
+
 \def\newblock{\hskip .11em\@plus.33em\@minus.07em}
 % Louis: I moved \newblock outside of thebibliography environment so that 
 %        this class can be compatible with the 'Natbib' package.
 
-% Natbib: If you are using 'natbib' package, the following 'thebibliography'
+% Natbib: If you are using 'natbib' package, the above 'thebibliography'
 %         environment will be overwritten by the 'Natbib' package. You will
 %         need to add the following commands:
 %
@@ -558,21 +561,7 @@
 %
 %         after you load the 'natbib' package so that the format and spacing
 %         is consistent with this template.
-
-\newcommand\refname{References} % Allows user to change it later
-\newenvironment{thebibliography}[1]
-  {\chapter*{\refname\markboth
-  {\MakeUppercase\refname}{\MakeUppercase\refname}}
-  \addcontentsline{toc}{chapter}{\refname}
-  \renewcommand\baselinestretch{1}
-  \@normalsize
-  \list{[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
-    \advance\leftmargin\labelsep
-    \usecounter{enumi}}
-    %\def\newblock{\hskip .11em plus .33em minus -.07em}
-    \sloppy
-    \sfcode`\.=1000\relax}
-  {\endlist\renewcommand\baselinestretch{\@spacing}\@normalsize}
+%
 
 % \def\@biblabel#1{[#1]\hfill}  % Produces the label for a \bibitem[...]
                                 % command. 
@@ -823,6 +812,8 @@
 % the right mark is changed by a \section command.  However, it does
 % produce somewhat anomalous results if two \bothmark's occur on the same page.
 % 
+% 2017 Louis: We are not using header in the UCLA thesis class, so \markboth{}{}
+%             are not relevant to us.
 
 \mark{{}{}}   % Initializes TeX's marks
 
