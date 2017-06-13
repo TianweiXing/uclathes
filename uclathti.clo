@@ -71,8 +71,9 @@
          \MakeUppercase{University of California} \\
          Los Angeles \\
          \vfill
-         \@title \normalsize \normalfont \\
+         \@titlesize \@title \\
          \vskip 48pt minus 12pt
+		 \normalsize \normalfont
          A \@thesisname\
          submitted in partial satisfaction \\
          of the requirements for the degree \\
@@ -80,9 +81,9 @@
          \vskip 24pt minus 6pt
          by \\
          \vskip 24pt minus 6pt
-         \@author \normalsize \normalfont \\ % bolding has been removed (2017, Louis)
+         {\@author} \\ % bolding has been removed (2017, Louis)
          \vfill
-         \@degreeyear
+         \normalsize \normalfont \@degreeyear
       \end {center}
       \ColumnRestore
    \end {titlepage}
@@ -115,7 +116,7 @@
          %\@copyrightinfo
          \normalsize \normalfont \copyright\ Copyright by \\
          \@author \\
-         \@copyrightyear
+         \normalsize \normalfont \@copyrightyear
       \end{center}
    \fi
    \ColumnRestore
@@ -159,8 +160,6 @@
 
 \newcommand\@signatureline[1]{
    #1\par%
-   %\vskip-10pt{#1} \\
-   %\vskip 24pt plus0pt minus15pt
 }
 
 \newcommand\@makesignaturepage{
@@ -168,11 +167,9 @@
    \ifdefined\pdfbookmark\pdfbookmark{Committee}{committee}\fi
    \noindent
    \renewcommand\baselinestretch{\@doublespacing}\@normalsize
-   \normalsize \normalfont The \@thesisname\ of \@author\ is approved.\par%
-   %\vskip 12pt plus0pt minus24pt
+   \normalsize \normalfont The \@thesisname\ of {\@author} is approved.\par%
    {\centering % Need \centering instead of \begin{center} to avoid extra 
    % line spacing (2017 Thesis & Dissertation Filing Requirements).
-   %\begin {center}
       % Non-chair committee members
       \ifnum\c@members>0 \@signatureline{\@memberA}
          \ifnum\c@members>1 \@signatureline{\@memberB}
@@ -204,7 +201,6 @@
 	  University of California, Los Angeles\par
       \@degreeyear\par % Need to end with \par to avoid \centering not end issue
    }
-   %\end {center}
    \ColumnRestore
    \renewcommand\baselinestretch{\@spacing}\@normalsize
 }
@@ -285,8 +281,10 @@
 
 \newcounter{vitaitems}
 \setcounter{vitaitems}{0}
-\newcommand\@vitadate[1]{{\parbox[t]{1.25in}{\normalfont{#1}}}}
-\newcommand\@vitatext[1]{{\parbox[t]{5.25in}{\normalfont{#1}}}}
+%\newcommand\@vitadate[1]{{\parbox[t]{1in}{\normalfont{#1}}}}
+%\newcommand\@vitatext[1]{{\parbox[t]{5.25in}{\normalfont{#1}}}}
+\newcommand\@vitadate[1]{#1}
+\newcommand\@vitatext[1]{#1}
 \newcommand\vitaitem[2]{
    \ifcase\value{vitaitems}
       \def\@vitaA{\@vitadate{#1} & \@vitatext{#2}} \or
@@ -365,28 +363,25 @@
    \addtocounter{publications}{1}
 }
 
-\newcommand\@printvitaitem[1]{
-   \noindent
-   \begin {tabular} {@{}p{1.25in}@{}p{5.25in}}
-      #1
-   \end {tabular}
-}
-
+\newcommand\@printvitaitem[1]{#1\\}
 \newcommand\@printpubitem[1]{\noindent #1\par}
+
+\newcommand\vitaname{Vita}        % Allows user to change later
+\newcommand\vitastretch{1.67}     % Allows user to change later
+\newcommand\vitadatewidth{1in}    % Width of date column in vita
+\newcommand\vitatextwidth{5.25in} % Width of text column in vita
+% The sum of the widths needs to be 6.25in since 2 columns give 3 column
+% spacing. 3 column spacing take 3 * 6 pt * 0.1384 in/pt ~= 0.25 in.
+% Remaning width for table columns is 6.5in - 0.25in = 6.25in
+
 \newcommand{\customCV}[1]{\def\@customCV{#1}}
-\newcommand{\CVstretch}[1]{\def\@CVstretch{#1}}
-\newcommand\vitaname{Vita} % Allows user to change later
 
 \newcommand\@makevitapage{
    % Save the old stretch.
+   \ColumnSave   
    \let\OldArrayStretch=\arraystretch
-   \ifdefined\@CVstretch
-      \renewcommand\arraystretch{\@CVstretch}
-   \else
-      \renewcommand\arraystretch{1.67}
-   \fi
-   \ColumnSave
-   \par\pagestyle{plain}
+   \renewcommand\arraystretch{\vitastretch}
+   \pagestyle{plain}
    \ifnum\c@vitaitems>0
       \renewcommand\baselinestretch{\@spacing}\@normalsize
 	  \chapter*{\vitaname}% Changes this to a chapter*
@@ -395,49 +390,54 @@
 %         \textsc{\large Vita} \\
 %      \end{center}
 %      \vskip 12pt
-      \ifnum\c@vitaitems>0  \@printvitaitem{\@vitaA} \fi
-      \ifnum\c@vitaitems>1  \@printvitaitem{\@vitaB} \fi
-      \ifnum\c@vitaitems>2  \@printvitaitem{\@vitaC} \fi
-      \ifnum\c@vitaitems>3  \@printvitaitem{\@vitaD} \fi
-      \ifnum\c@vitaitems>4  \@printvitaitem{\@vitaE} \fi
-      \ifnum\c@vitaitems>5  \@printvitaitem{\@vitaF} \fi
-      \ifnum\c@vitaitems>6  \@printvitaitem{\@vitaG} \fi
-      \ifnum\c@vitaitems>7  \@printvitaitem{\@vitaH} \fi
-      \ifnum\c@vitaitems>8  \@printvitaitem{\@vitaI} \fi
-      \ifnum\c@vitaitems>9  \@printvitaitem{\@vitaJ} \fi
-      \ifnum\c@vitaitems>10 \@printvitaitem{\@vitaK} \fi
-      \ifnum\c@vitaitems>11 \@printvitaitem{\@vitaL} \fi
-      \ifnum\c@vitaitems>12 \@printvitaitem{\@vitaM} \fi
-      \ifnum\c@vitaitems>13 \@printvitaitem{\@vitaN} \fi
-      \ifnum\c@vitaitems>14 \@printvitaitem{\@vitaO} \fi
-      \ifnum\c@vitaitems>15 \@printvitaitem{\@vitaP} \fi
-      \ifnum\c@vitaitems>16 \@printvitaitem{\@vitaQ} \fi
-      \ifnum\c@vitaitems>17 \@printvitaitem{\@vitaR} \fi
-      \ifnum\c@vitaitems>18 \@printvitaitem{\@vitaS} \fi
-      \ifnum\c@vitaitems>19 \@printvitaitem{\@vitaT} \fi
-      \ifnum\c@vitaitems>20 \@printvitaitem{\@vitaU} \fi
-      \ifnum\c@vitaitems>21 \@printvitaitem{\@vitaV} \fi
-      \ifnum\c@vitaitems>22 \@printvitaitem{\@vitaW} \fi
-      \ifnum\c@vitaitems>23 \@printvitaitem{\@vitaX} \fi
-      \ifnum\c@vitaitems>24 \@printvitaitem{\@vitaY} \fi
-      \ifnum\c@vitaitems>25 \@printvitaitem{\@vitaZ} \fi
-   \fi
+      \normalsize \normalfont \noindent%
+	  \renewcommand\baselinestretch{\@spacing}\@normalsize
+	  \begin{tabular}{p{\vitadatewidth}p{\vitatextwidth}}
+          \ifnum\c@vitaitems>0  \@printvitaitem{\@vitaA} \fi
+          \ifnum\c@vitaitems>1  \@printvitaitem{\@vitaB} \fi
+          \ifnum\c@vitaitems>2  \@printvitaitem{\@vitaC} \fi
+          \ifnum\c@vitaitems>3  \@printvitaitem{\@vitaD} \fi
+          \ifnum\c@vitaitems>4  \@printvitaitem{\@vitaE} \fi
+          \ifnum\c@vitaitems>5  \@printvitaitem{\@vitaF} \fi
+          \ifnum\c@vitaitems>6  \@printvitaitem{\@vitaG} \fi
+          \ifnum\c@vitaitems>7  \@printvitaitem{\@vitaH} \fi
+          \ifnum\c@vitaitems>8  \@printvitaitem{\@vitaI} \fi
+          \ifnum\c@vitaitems>9  \@printvitaitem{\@vitaJ} \fi
+          \ifnum\c@vitaitems>10 \@printvitaitem{\@vitaK} \fi
+          \ifnum\c@vitaitems>11 \@printvitaitem{\@vitaL} \fi
+          \ifnum\c@vitaitems>12 \@printvitaitem{\@vitaM} \fi
+          \ifnum\c@vitaitems>13 \@printvitaitem{\@vitaN} \fi
+          \ifnum\c@vitaitems>14 \@printvitaitem{\@vitaO} \fi
+          \ifnum\c@vitaitems>15 \@printvitaitem{\@vitaP} \fi
+          \ifnum\c@vitaitems>16 \@printvitaitem{\@vitaQ} \fi
+          \ifnum\c@vitaitems>17 \@printvitaitem{\@vitaR} \fi
+          \ifnum\c@vitaitems>18 \@printvitaitem{\@vitaS} \fi
+          \ifnum\c@vitaitems>19 \@printvitaitem{\@vitaT} \fi
+          \ifnum\c@vitaitems>20 \@printvitaitem{\@vitaU} \fi
+          \ifnum\c@vitaitems>21 \@printvitaitem{\@vitaV} \fi
+          \ifnum\c@vitaitems>22 \@printvitaitem{\@vitaW} \fi
+          \ifnum\c@vitaitems>23 \@printvitaitem{\@vitaX} \fi
+          \ifnum\c@vitaitems>24 \@printvitaitem{\@vitaY} \fi
+          \ifnum\c@vitaitems>25 \@printvitaitem{\@vitaZ} \fi
+	  \end{tabular}
+   \fi%
    \ifnum\c@publications>0
-	  \ifx\@spacing\@doublespacing\parskip 24pt plus 4pt
-	  \else                       \parskip 12pt plus 2pt
-	  \fi
-	  \vskip 42pt
-	  \begin{center}
-		 \large \scshape
+	  \vskip 36pt
+	  {\centering
+		 \header{
 		 \if@pubs
 		    \if@pres Publications and Presentations
 		    \else    Publications
 		    \fi
 		 \else       Presentations
 		 \fi
-		 \\
-	  \end{center}
-	  \nobreak \vskip 12pt
+		 }\par
+	  }
+      \nobreak \vspace{12pt}% Use \vspace to make sure no page break here
+      {% Make sure the \parskip only affect this part
+	  \ifx\@spacing\@doublespacing\parskip 24pt plus 4pt
+	  \else                       \parskip 12pt plus 2pt
+	  \fi
 	  \ifnum\c@publications>0  \@printpubitem{\@pubA} \fi
 	  \ifnum\c@publications>1  \@printpubitem{\@pubB} \fi
 	  \ifnum\c@publications>2  \@printpubitem{\@pubC} \fi
@@ -464,12 +464,13 @@
 	  \ifnum\c@publications>23 \@printpubitem{\@pubX} \fi
 	  \ifnum\c@publications>24 \@printpubitem{\@pubY} \fi
 	  \ifnum\c@publications>25 \@printpubitem{\@pubZ} \fi
+      }% End the \parskip change
    \fi
    \ifdefined\@customCV
       \@customCV
    \fi
-   \ColumnRestore
    \renewcommand\arraystretch{\OldArrayStretch}
+   \ColumnRestore
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -498,7 +499,7 @@
       \begin{center}
          \MakeUppercase{Abstract of the \@Thesisname} \\
          \vskip 24pt minus 6pt
-         \@title \normalsize \normalfont \\
+         \@title \\ \normalsize \normalfont
          \vskip 24pt minus 6pt
          by \\
          \vskip 24pt minus 6pt

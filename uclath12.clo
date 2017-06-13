@@ -115,8 +115,8 @@
 % SIDE MARGINS:
 %\oddsidemargin 0in
 %\evensidemargin 0in    
-% Louis: these setting makes the margin non-symmetry. The default latex
-%   margins are already 1 inch on the left and upper sides. 
+% Louis: these settings make the margin non-symmetry. The default latex
+%        margins are already 1 inch on the left and upper sides. 
 
 % VERTICAL SPACING:        
                           % Top of page:
@@ -127,7 +127,9 @@
                           % Bottom of page:
 \footskip 0.40in          %    Distance from baseline of box containing
                           %    foot to baseline of last line of text.
-% Louis: footskip -> 0.40in so that the page number is 0.75" in from bottom
+% Louis: footskip -> 0.40in to give more space between page number and the 
+%        last line of text. If you change this, you will also need to change
+%        \textheight.
 
 % DIMENSION OF TEXT:
 
@@ -146,7 +148,9 @@
 
 % FOOTNOTES:
 
-\footnotesep 8.4pt    % Height of strut placed at the beginning of every
+% As of 2016, footnotes must be separated by a single blank line.
+% Original value here was 8.4pt so we just doubled it.
+\footnotesep 16.8pt   % Height of strut placed at the beginning of every
                       % footnote = height of normal \footnotesize strut,
                       % so no extra space between footnotes.
 
@@ -269,10 +273,10 @@
 %
 
 \def\@makeschapterhead#1{            % Heading for \chapter* command
-   % \vspace*{20pt}                  % Space at top of page.
+  % \vspace*{20pt}                   % Space at top of page.
   { \parindent 0pt \raggedright 
-    \centering \large \scshape       % Title.
-    #1\par 
+    \centering                       % Title.
+    \header{#1}\par 
     \nobreak                         % TeX penalty to prevent page break.
     \vskip 20pt                      % Space between title and text.
   } }

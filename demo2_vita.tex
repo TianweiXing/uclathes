@@ -1,7 +1,13 @@
 % UCLA Policy on Vita
 % For security reasons, UCLA policy specifies that your birth year and birth place should not be included in your vita.
 %
-\CVstretch  {1.5}% default is 1.67
+\renewcommand{\vitastretch}{1}% default is 1.67
+
+\renewcommand{\vitadatewidth}{1.5in} % defaule is 1in
+
+\renewcommand{\vitatextwidth}{4.75in}  % default is 5.25in
+% Note \vitadatewidth + \vitatextwidth needs to be 6.25in since the table has  
+% 3 column spacing. 3 spacing take 3 * 6 pt * 0.1384 in/pt = 0.2491 in.
 
 \vitaitem   {2006 -- 2010}
                 {B.S. in Physics, National Tsing Hua University (NTHU), Hsinchu, Taiwan.}
@@ -23,6 +29,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % Preamble for this customized CV content ==============================
+
+\renewcommand{\pubstretch}{1.5}% 
 
 % Ignore the label option [] in the \bibitem
 \let\oldbibitem\bibitem% Copy \bibitem into \oldbibitem
@@ -66,7 +74,9 @@
 
 \customCV{% Put anything you want to show here
 	% the 'mypublications' environment is defined in the uclathes class
+	\vfill
 	\begin{mypublications}{9}
+    \vspace{12pt}
 	\bibitem [{\citenamefont {Kusenko}\ \emph {et~al.}(2017)\citenamefont
 	  {Kusenko}, \citenamefont {Kawasaki}, \citenamefont {Pearce},\ and\
 	  \citenamefont {Yang}}]{Kusenko:2017kdr}%
@@ -111,5 +121,6 @@
 	  {arXiv:1601.07753 [hep-ph]} \BibitemShut {NoStop}%
 	%%CITATION = ARXIV:1601.07753;%%
 	\end{mypublications}%
+	\vfill
 }
 \makeatother

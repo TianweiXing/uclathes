@@ -150,6 +150,10 @@
 %
 \RequirePackage{ifthen}
 
+% Internally, this forces all headers checked by the University to meet the formatting
+% guidelines.
+\def\header#1{\MakeUppercase{#1}}
+
 % Get the title page macros.
 \input{uclathma.clo}
 
@@ -192,6 +196,12 @@
 \DeclareOption{nolistoffigures}{\LOFfalse}
 \DeclareOption{nolistoftables}{\LOTfalse}
 % \makeintropages will response to these settings
+
+%
+% Option for change the style of chapter* titles
+% This affects acknowledgment, CV, table of contents, LOT, LOF, references but 
+% not the title page and abstract page.
+\DeclareOption{scheader}{\def\header#1{\large \scshape #1}}
 
 % The \ProcessOptions command does the options.
 
@@ -485,7 +495,8 @@
 	\addcontentsline{toc}{chapter}{\listfigurename}
     \@starttoc{lof}%
     }
-\newcommand*\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
+\newcommand*\l@figure{\@dottedtocline{1}{0em}{2.3em}} % remove indent for lof and lot
+%\newcommand*\l@figure{\@dottedtocline{1}{1.5em}{2.3em}}
 %\newif\if@figures
 %\def\listoffigures{%
 %  \if@figures
@@ -578,13 +589,15 @@
 %       \newcounter{publications} so here we name the new environment as 
 %       'mypublications'.
 
-\newenvironment{mypublications}[1]{
-  \begin{center}
-    \textsc{\large Publications} \\
-  \end{center}
-  \nobreak \vskip 12pt
-  \renewcommand\baselinestretch{1}
-  \@normalsize
+\newcommand{\pubstretch}{\@spacing} % default stretch for publications environment
+
+\newenvironment{mypublications}[1]{%
+  \vskip 30pt
+  {\centering
+    \header{Publications}\par%
+  }%
+  \renewcommand\baselinestretch{\pubstretch}%
+  \@normalsize%
   \list{[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
     \advance\leftmargin\labelsep
     \usecounter{enumi}}
